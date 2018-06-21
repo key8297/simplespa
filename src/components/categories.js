@@ -1,71 +1,46 @@
 import React, { Component } from 'react';
-import ReactDataGrid from 'react-data-grid';
-import { Redirect } from 'react-router'
-
-const { Row, Cell } = ReactDataGrid;
+import ReactTable from 'react-table';
+import { Redirect } from 'react-router';
+import "react-table/react-table.css";
 let cat = require('../database/mocking');
-
-class CellRenderer extends Component {
-  render() {
-    switch(this.props.column.key){
-      case 'code':
-        return <a href={'category/' + this.props.rowData.code}><Cell {...this.props} /> </a>;
-      case 'code':
-        return <a href={'category/' + this.props.rowData.code}><Cell {...this.props} /> </a>;
-      default:
-        return <Cell {...this.props} />;
-    }
-  }
-}
-
-class RowRenderer extends React.Component {
-  render() {
-    return (<Row cellRenderer={CellRenderer} ref="row" {...this.props} />);
-  }
-}
 
 export default class Categories extends Component {
   constructor(props, context) {
     super(props, context);
-    this.createRows();
-    this._columns = [
-      { key: 'code', name: 'Code' },
-      { key: 'description', name: 'Description' },
-      { key: 'active', name: 'Active' },
-      { key: 'delete', name: 'Action' }
+    this.columns = [
+      {
+        accessor: 'code',
+        Header: 'Code',
+        Cell: (cellProps) => {
+          return <a href={`category/${cellProps.original.code}`}>{cellProps.original.code}</a>
+        }
+      },
+      { accessor: 'description', Header: 'Description' },
+      { accessor: 'active', Header: 'Active' },
+      {
+        accessor: '', Header: 'Action',
+        Cell: (cellProps) => {
+          return <i className="fa fa-bin" style={{fontSize:36}}></i>
+        }
+      }
     ];
+
+    this.data = cat.getCategories();
 
     this.state = {
       createNew: false
     };
 
-    this.createNew = this.createNew.bind(this);    
-  }
-
-  createRows = () => {
-    this._rows = cat.getCategories();
-  };
-
-  rowGetter = (i) => {
-    return this._rows[i];
-  };
-
-  getCellActions(column, row) {
-    return [
-      {
-        icon: 'glyphicon glyphicon-link',
-        actions: [
-          {
-            text: 'Campaign Linking',
-            callback: () => { console.log(`${row} - ${column}`); }
-          }
-        ]
-      }
-    ];
+    this.createNew = this.createNew.bind(this);
+    this.deleteCategory = this.deleteCategory.bind(this);
   }
 
   createNew() {
     this.setState({ createNew: true });
+  }
+
+  deleteCategory(code) {
+    console.log(`Deleting ... ${code}`);
   }
 
   render() {
@@ -76,16 +51,22 @@ export default class Categories extends Component {
 
     return (
       <div>
-        <button className="btn btn-info" onClick={this.createNew}>New category</button>
-        <ReactDataGrid
-          columns={this._columns}
-          rowGetter={this.rowGetter}
-          rowsCount={this._rows.length}
-          minHeight={500}
-          getCellActions={getCellActions}
-          rowRenderer={RowRenderer} />
+        <button className="btn btn-info" style={styles.button} onClick={this.createNew}>New category</button>
+        <ReactTable
+          data={this.data}
+          columns={this.columns}
+          defaultPageSize={10}
+          className="-striped -highlight"
+        />
+
       </div>
     );
   }
+}
 
+const styles = {
+  button: {
+    marginTop: 10,
+    marginBottom: 10
+  }
 }

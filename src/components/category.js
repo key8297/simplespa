@@ -13,7 +13,9 @@ export default class Category extends Component {
             category: {},
             backToCategories: false
         };
-
+        if (this.isNew) {
+            this.state.category.active = 'true';
+        }
         this.save = this.save.bind(this);
         this.cancel = this.cancel.bind(this);
     }
@@ -42,6 +44,8 @@ export default class Category extends Component {
 
         return (
             <div>
+                <button className="btn btn-info" style={styles.button} onClick={this.save}>Save</button>
+                <button className="btn btn-primary" onClick={this.cancel}>Cancel</button>
                 <div className="form-group">
                     <label htmlFor="code">Code</label>
                     <input type="text" className="form-control" id="code" placeholder="Code" defaultValue={this.state.category.code}
@@ -57,9 +61,15 @@ export default class Category extends Component {
                     <input type="checkbox" className="form-check-input" id="active" defaultChecked={this.state.category.active == 'true'}
                         onChange={e => this.setState({ category: { ...this.state.category, active: e.target.checked.toString() } })} />
                 </div>
-                <button className="btn btn-info" onClick={this.save}>Save</button>
-                <button className="btn btn-primary" onClick={this.cancel}>Cancel</button>
+
             </div>
         );
     }
 }
+
+const styles = {
+    button:{
+      marginTop:10, 
+      marginBottom:10
+    }
+  }

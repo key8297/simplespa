@@ -29,10 +29,10 @@
   "dependencies": {
     "faker": "^4.1.0",
     "react": "^16.4.0",
-    "react-data-grid": "^4.0.7",
     "react-dom": "^16.4.0",
     "react-router-dom": "^4.3.1",
-    "react-smart-data-table": "^0.5.6"
+    "react-smart-data-table": "^0.5.6",
+    "react-table": "^6.8.6"
   },
   "babel": {
     "presets": [
