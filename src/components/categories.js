@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import { Redirect } from 'react-router';
+import { DeleteButton, AddButton } from './buttons';
 import "react-table/react-table.css";
 let cat = require('../database/mocking');
 
@@ -20,7 +21,7 @@ export default class Categories extends Component {
       {
         accessor: '', Header: 'Action',
         Cell: (cellProps) => {
-          return <i className="fa fa-bin" style={{fontSize:36}}></i>
+          return <DeleteButton onClick={() => this.deleteCategory(cellProps.original.code)} />
         }
       }
     ];
@@ -36,6 +37,7 @@ export default class Categories extends Component {
   }
 
   createNew() {
+    console.log('CreateNew');
     this.setState({ createNew: true });
   }
 
@@ -51,7 +53,8 @@ export default class Categories extends Component {
 
     return (
       <div>
-        <button className="btn btn-info" style={styles.button} onClick={this.createNew}>New category</button>
+        <AddButton onClick={this.createNew} />
+        {/* <button className="btn btn-info" style={styles.button} onClick={this.createNew}>New category</button> */}
         <ReactTable
           data={this.data}
           columns={this.columns}

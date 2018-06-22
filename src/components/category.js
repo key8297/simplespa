@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router';
+import {TextInput} from './inputs';
 let cat = require('../database/mocking');
 
 export default class Category extends Component {
@@ -46,16 +47,15 @@ export default class Category extends Component {
             <div>
                 <button className="btn btn-info" style={styles.button} onClick={this.save}>Save</button>
                 <button className="btn btn-primary" onClick={this.cancel}>Cancel</button>
-                <div className="form-group">
-                    <label htmlFor="code">Code</label>
-                    <input type="text" className="form-control" id="code" placeholder="Code" defaultValue={this.state.category.code}
-                        onChange={e => this.setState({ category: { ...this.state.category, code: e.target.value } })} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="description">Description</label>
-                    <input type="text" className="form-control" id="description" placeholder="Description" defaultValue={this.state.category.description}
-                        onChange={e => this.setState({ category: { ...this.state.category, description: e.target.value } })} />
-                </div>
+                
+                <TextInput id='code' caption='Code' defaultValue={this.state.category.code}
+                    onChange={e => this.setState({ category: { ...this.state.category, code: e.target.value } })}
+                />
+
+                <TextInput id='description' caption='Description' defaultValue={this.state.category.description}
+                    onChange={e => this.setState({ category: { ...this.state.category, description: e.target.value } })}
+                />
+
                 <div className="form-group form-check">
                     <label className="form-check-label" htmlFor="active">Active</label>
                     <input type="checkbox" className="form-check-input" id="active" defaultChecked={this.state.category.active == 'true'}

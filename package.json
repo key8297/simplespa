@@ -29,6 +29,7 @@
   "dependencies": {
     "faker": "^4.1.0",
     "react": "^16.4.0",
+    "react-confirm-alert": "^2.0.2",
     "react-dom": "^16.4.0",
     "react-router-dom": "^4.3.1",
     "react-smart-data-table": "^0.5.6",
