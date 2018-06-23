@@ -6,7 +6,7 @@ var parentDir = path.join(__dirname, '../');
 module.exports = {
 	mode: 'development',
 	entry: [
-		path.join(__dirname, '../index.js')
+		path.join(__dirname, '../src/web/index.js')
 	],
 	module: {
 		rules: [{
@@ -20,7 +20,7 @@ module.exports = {
 		]
     },
     output: {
-        path: parentDir + '/dist',
+        path: parentDir + '/src/web',
         filename: 'bundle.js'
     },
     devServer: {
