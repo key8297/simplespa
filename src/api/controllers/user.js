@@ -4,7 +4,6 @@ const User = require('./../models/user');
 const auth = require('../auth/auth');
 
 class UserController{
-
     signup(user){
         let deferred = q.defer();
         User.findOne({email:user.email})

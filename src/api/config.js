@@ -1,4 +1,3 @@
 module.exports = {
-    dbUrl : 'mongodb://dev:keynewchapter@ds147659.mlab.com:47659/ncstore',
-    //url: 'mongodb://localhost/alone'
+    dbUrl : 'mongodb://dev:demo-hk2@ds117101.mlab.com:17101/demo-hk'
 }

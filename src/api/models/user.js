@@ -10,7 +10,7 @@ var userSchema = new Schema({
     type: String,
     required: [true, "Mandatory: Password"],
   },
-  divisions: Number
+  division: Number
 });
 
 var User = mongoose.model('User', userSchema);
