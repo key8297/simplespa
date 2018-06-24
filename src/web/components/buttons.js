@@ -79,6 +79,20 @@ export class CancelButton extends Component {
     }
 }
 
+export class CustomButton extends Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <button style={styles.pageButton} className={this.props.className} onClick={() => this.props.onClick()}>
+                <i className={this.props.icon}></i>
+                <span>{this.props.caption}</span> 
+            </button>
+        );
+    }
+}
+
 const styles = {
     pageButton: {
         marginTop: 10,

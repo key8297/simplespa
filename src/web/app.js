@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 import Members from './pages/members';
 import Member from './pages/member';
+import Login from './pages/login';
 
 import menuCss from './css/menu.css';
 
@@ -10,27 +11,42 @@ const Home = () => (
 );
 
 const Navigation = () => (
-    <nav>
-        <ul>
-            <li><NavLink to='/home'>Home</NavLink></li>
-            <li><NavLink to='/members'>Members</NavLink></li>
-            <li><NavLink to='/category'>Category</NavLink></li>
-        </ul>
+    // <nav>
+    //     <ul>
+    //         <li><NavLink to='/home'>Home</NavLink></li>
+    //         <li><NavLink to='/members'>Members</NavLink></li>
+    //     </ul>
+    // </nav>
+
+    <nav className="navbar">
+        <div className="container-fluid">
+            <div className="navbar-header">
+                <span style={{fontFamily:'georgia'}} className="navbar-brand" >Demo-hk</span>
+            </div>
+            <ul className="nav navbar-nav">
+                <li><NavLink to='/home'><span className="glyphicon glyphicon-home" /> Home</NavLink></li>
+                <li><NavLink to='/members'><span className="glyphicon glyphicon-user" /> Members</NavLink></li>
+            </ul>
+            <ul className="nav navbar-nav navbar-right">
+                <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
     </nav>
 );
 
 const Main = () => (
     <Switch>
-      <Route exact path='/home' component={Home}></Route>
-      <Route exact path='/members' component={Members}></Route>
-      <Route exact path='/member' component={Member}></Route>
-      <Route path='/member/:id' component={Member}></Route>
+        <Route exact path='/home' component={Home}></Route>
+        <Route exact path='/members' component={Members}></Route>
+        <Route exact path='/member' component={Member}></Route>
+        <Route exact path='/login' component={Login}></Route>
+        <Route path='/member/:id' component={Member}></Route>
     </Switch>
-  );
+);
 
 export default class App extends Component {
     render() {
-        // localStorage.clear();
+        localStorage.clear();
         return (
             <div>
                 <Navigation />

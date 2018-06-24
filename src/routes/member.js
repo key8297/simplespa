@@ -10,9 +10,6 @@ const member = (app) => {
     });
 
     app.get('/api/member/search', (req, res) => {
-        console.log(req.query);
-        console.log(req.params);
-        console.log(req.body);
         let controller = new MemberController();
         controller.retrieve(req.query)
             .then(members => {

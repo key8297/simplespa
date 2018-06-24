@@ -74,8 +74,6 @@ export default class Members extends Component {
     return (
       <div>
         <AddButton onClick={this.createNew} />
-        <AddButton onClick={() => { localStorage.clear(); this.refresh() }} />
-
         <ReactTable
           data={this.state.members}
           columns={this.columns}

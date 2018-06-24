@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config ./webpack/webpack.dev.config.js",
     "start": "nodemon --watch src server.js",
-    "build": "webpack --config ./webpack/webpack.dev.config.js"
+    "build": "webpack --config ./webpack/webpack.dev.config.js",
+    "all": "npm run build & npm start"
   },
   "author": "",
   "license": "ISC",
