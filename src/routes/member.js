@@ -1,4 +1,5 @@
 const MemberController = require('../api/controllers/member');
+const auth = require('../api/auth/auth');
 
 const member = (app) => {
     app.get('/api/member/createdemo', (req, res) => {
@@ -9,8 +10,8 @@ const member = (app) => {
             )
     });
 
-    app.get('/api/member/search', (req, res) => {
-        let controller = new MemberController();
+    app.get('/api/member/search', auth.verifyToken, (req, res) => {
+        let controller = new MemberController(req.user.division);
         controller.retrieve(req.query)
             .then(members => {
                 if (members.length == 1)
@@ -23,8 +24,8 @@ const member = (app) => {
             });
     });
 
-    app.post('/api/member/delete', (req, res) => {
-        let controller = new MemberController();
+    app.post('/api/member/delete', auth.verifyToken, (req, res) => {
+        let controller = new MemberController(req.user.division);
         controller.delete(req.body)
             .then(success =>
                 res.send(success))
@@ -33,9 +34,9 @@ const member = (app) => {
             );
     });
 
-    app.post('/api/member/create', (req, res) => {
-        
-        let controller = new MemberController();
+    app.post('/api/member/create', auth.verifyToken, (req, res) => {
+
+        let controller = new MemberController(req.user.division);
         controller.create(req.body)
             .then(success =>
                 res.send(success))
@@ -44,9 +45,8 @@ const member = (app) => {
             );
     });
 
-    app.post('/api/member/update', (req, res) => {
-        console.log(req.body);
-        let controller = new MemberController();
+    app.post('/api/member/update', auth.verifyToken, (req, res) => {
+        let controller = new MemberController(req.user.division);
         controller.update(req.body)
             .then(success =>
                 res.send(success))

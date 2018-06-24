@@ -1,8 +1,10 @@
 'use strict';
 const q = require('q');
 const MemberController = require('./member');
+const UserController = require('./user');
+
 const Member = require('../models/member');
-const User = require('../models/user');
+// const User = require('../models/user');
 
 class MiscController {
 
@@ -37,21 +39,23 @@ class MiscController {
     }
 
     createUser(division){
-        let deferred = q.defer();
+        let controller = new UserController(division);
+        return controller.createDemoUser();
+        // let deferred = q.defer();
 
-        let user = new User(
-            {
-                name: `user${division}`,
-                password: `pass${division}`,
-                division
-            }
-        );
+        // let user = new User(
+        //     {
+        //         name: `user${division}`,
+        //         password: `pass${division}`,
+        //         division
+        //     }
+        // );
 
-        user.save()
-        .then(user => 
-            deferred.resolve(user));
+        // user.save()
+        // .then(user => 
+        //     deferred.resolve(user));
 
-        return deferred.promise;
+        // return deferred.promise;
     }
 
     createNewDemo(){

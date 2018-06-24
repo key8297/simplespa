@@ -13,7 +13,16 @@ module.exports.createDemo = () => {
 
 module.exports.getAccounts = () => {
     let deferred = q.defer();
-    axios('/api/member/search')
+    let token = localStorage.getItem('token');
+    console.log(token);
+    axios({
+        method: 'GET',
+        url: '/api/member/search',
+        headers: {
+            'content-Type': 'application/json',
+            authorization: `bearer ${token}`
+        }
+    })
     .then(members => {
         deferred.resolve(members.data); 
     });

@@ -23,9 +23,9 @@ const Navigation = () => (
                 <li><NavLink to='/home'><span className="glyphicon glyphicon-home" /> Home</NavLink></li>
                 <li><NavLink to='/members'><span className="glyphicon glyphicon-user" /> Members</NavLink></li>
             </ul>
-            <ul className="nav navbar-nav navbar-right">
+            {/* <ul className="nav navbar-nav navbar-right">
                 <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
+            </ul> */}
         </div>
     </nav>
 );
@@ -42,7 +42,7 @@ const Main = () => (
 
 export default class App extends Component {
     render() {
-        localStorage.clear();
+        // localStorage.clear();
         return (
             <div>
                 <Navigation />

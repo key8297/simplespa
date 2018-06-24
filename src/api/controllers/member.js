@@ -4,6 +4,10 @@ const Member = require('../models/member');
 
 class MemberController {
 
+    constructor(division){
+        this.division = division;
+    }
+
     demo(division) {
         let deferred = q.defer();
         console.log('demo');
@@ -38,13 +42,14 @@ class MemberController {
 
     create(newMember) {
         let deferred = q.defer();
+        let division = this.division;
         Member.findOne({}, 'code', { sort: { code: -1 } })
             .then(latest => {
                 let code;
                 if (!latest) code = 1
                 else code = latest.code + 1;
 
-                let member = Object.assign(new Member(), newMember, { code });
+                let member = Object.assign(new Member(), newMember, { code, division });
                 member.save();
                 deferred.resolve(member);
             });
@@ -54,10 +59,11 @@ class MemberController {
 
     update(updateMember) {
         let deferred = q.defer();
+        let division = this.division;
 
         Member.findOne({ _id: updateMember._id })
             .then(current => {
-                let readOnly = { _id: current._id, division: current.division, code: current.code };
+                let readOnly = { _id: current._id, division, code: current.code };
                 let member = Object.assign(current, updateMember, readOnly);
                 member.save();
                 deferred.resolve(member);
@@ -67,6 +73,8 @@ class MemberController {
 
     retrieve(filter) {
         let deferred = q.defer();
+        let division = this.division;
+        filter = Object.assign(filter, {division});
         Member.find(filter)
             .then(members => deferred.resolve(members));
         return deferred.promise;
@@ -74,6 +82,8 @@ class MemberController {
 
     delete(filter) {
         let deferred = q.defer();
+        let division = this.division;
+        filter = Object.assign(filter, {division});
         Member.remove(filter)
             .then(err => {
                 if (err) {
