@@ -2,21 +2,17 @@ import React, { Component } from 'react';
 import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 import Members from './pages/members';
 import Member from './pages/member';
-import Login from './pages/login';
+// import Login from './pages/login2';
+import Home from './pages/home';
+
 
 import menuCss from './css/menu.css';
 
-const Home = () => (
-    <h1>Home</h1>
-);
+// const Home = () => (
+//     <h1>Home</h1>
+// );
 
 const Navigation = () => (
-    // <nav>
-    //     <ul>
-    //         <li><NavLink to='/home'>Home</NavLink></li>
-    //         <li><NavLink to='/members'>Members</NavLink></li>
-    //     </ul>
-    // </nav>
 
     <nav className="navbar">
         <div className="container-fluid">
@@ -39,7 +35,7 @@ const Main = () => (
         <Route exact path='/home' component={Home}></Route>
         <Route exact path='/members' component={Members}></Route>
         <Route exact path='/member' component={Member}></Route>
-        <Route exact path='/login' component={Login}></Route>
+        {/* <Route exact path='/login' component={Login}></Route> */}
         <Route path='/member/:id' component={Member}></Route>
     </Switch>
 );
