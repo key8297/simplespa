@@ -1,8 +1,17 @@
 const q = require('q');
 const axios = require('axios');
 
+const createHeader = () => {
+    let token = localStorage.getItem('token');
+    return {
+        'content-Type': 'application/json',
+        authorization: `bearer ${token}`
+    };
+}
+
 module.exports.createDemo = () => {
     let deferred = q.defer();
+    let headers = createHeader();
     axios.post('/api/misc/createdemo')
     .then(user => {
         deferred.resolve(user.data); 
@@ -13,15 +22,11 @@ module.exports.createDemo = () => {
 
 module.exports.getAccounts = () => {
     let deferred = q.defer();
-    let token = localStorage.getItem('token');
-    console.log(token);
+    let headers = createHeader();
     axios({
         method: 'GET',
         url: '/api/member/search',
-        headers: {
-            'content-Type': 'application/json',
-            authorization: `bearer ${token}`
-        }
+        headers
     })
     .then(members => {
         deferred.resolve(members.data); 
@@ -32,9 +37,13 @@ module.exports.getAccounts = () => {
 
 module.exports.getAccount = (_id) => {
     let deferred = q.defer();
-    console.log(_id);
-    axios.get('/api/member/search', {params: {_id}})
-    // axios('/api/member/search', {_id})
+    let headers = createHeader();
+    axios({
+        method: 'GET',
+        url: '/api/member/search',
+        params: {_id},
+        headers
+    })
     .then(members => {
         deferred.resolve(members.data); 
     });
@@ -44,8 +53,14 @@ module.exports.getAccount = (_id) => {
 
 module.exports.addAccount = (member) => {
     let deferred = q.defer();
+    let headers = createHeader();
 
-    axios.post('/api/member/create', member)
+    axios({
+        method: 'POST',
+        url: '/api/member/create',
+        data: member,
+        headers
+    })
     .then(member => {
         deferred.resolve(member);
     })
@@ -58,8 +73,14 @@ module.exports.addAccount = (member) => {
 
 module.exports.saveAccount = (member) => {
     let deferred = q.defer();
+    let headers = createHeader();
 
-    axios.post('/api/member/update', member)
+    axios({
+        method: 'POST',
+        url: '/api/member/update',
+        data: member,
+        headers
+    })
     .then(member => {
         deferred.resolve(member);
     })
@@ -70,9 +91,16 @@ module.exports.saveAccount = (member) => {
 
 }
 
-module.exports.deleteAccount = (memberId) => {
+module.exports.deleteAccount = (_id) => {
+    let headers = createHeader();
     let deferred = q.defer();
-    axios.post('/api/member/delete', {_id: memberId})
+    
+    axios({
+        method: 'POST',
+        url: '/api/member/delete',
+        data: {_id},
+        headers
+    })
     .then(() => {
         deferred.resolve();
     })
