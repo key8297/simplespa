@@ -1,5 +1,6 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 var parentDir = path.join(__dirname, '../');
 
@@ -26,5 +27,5 @@ module.exports = {
     devServer: {
         contentBase: parentDir,
         historyApiFallback: true
-    }
+	}
 }

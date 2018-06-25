@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
 import Members from './pages/members';
 import Member from './pages/member';
-// import Login from './pages/login2';
 import Home from './pages/home';
-
-
 import menuCss from './css/menu.css';
-
-// const Home = () => (
-//     <h1>Home</h1>
-// );
 
 const Navigation = () => (
 
@@ -20,7 +13,7 @@ const Navigation = () => (
                 <span style={{fontFamily:'georgia'}} className="navbar-brand" >Demo-hk</span>
             </div>
             <ul className="nav navbar-nav">
-                <li><NavLink to='/home'><span className="glyphicon glyphicon-home" /> Home</NavLink></li>
+                <li><NavLink to='/home'><span className="glyphicon glyphicon-home" /> Getting start</NavLink></li>
                 <li><NavLink to='/members'><span className="glyphicon glyphicon-user" /> Members</NavLink></li>
             </ul>
             {/* <ul className="nav navbar-nav navbar-right">
