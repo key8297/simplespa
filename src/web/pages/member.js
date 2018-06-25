@@ -56,19 +56,19 @@ export default class Member extends Component {
                 <SaveButton onClick={this.save} />
                 <CancelButton onClick={this.cancel} />
 
-                <TextInput id='name' caption='Name' defaultValue={this.state.member.name}
+                <TextInput id='name' caption='Name' value={this.state.member.name}
                     onChange={e => this.setState({ member: { ...this.state.member, name: e.target.value } })}
                 />
 
-                <TextInput id='emai' caption='Email' defaultValue={this.state.member.email}
+                <TextInput id='emai' caption='Email' value={this.state.member.email}
                     onChange={e => this.setState({ member: { ...this.state.member, email: e.target.value } })}
                 />
 
-                <TextInput id='phone' caption='Phone' defaultValue={this.state.member.phone}
+                <TextInput id='phone' caption='Phone' value={this.state.member.phone}
                     onChange={e => this.setState({ member: { ...this.state.member, phone: e.target.value } })}
                 />
 
-                <TextInput id='website' caption='Web site' defaultValue={this.state.member.website}
+                <TextInput id='website' caption='Web site' value={this.state.member.website}
                     onChange={e => this.setState({ member: { ...this.state.member, website: e.target.value } })}
                 />
             </div>

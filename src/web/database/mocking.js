@@ -11,7 +11,6 @@ const createHeader = () => {
 
 module.exports.createDemo = () => {
     let deferred = q.defer();
-    let headers = createHeader();
     axios.post('/api/misc/createdemo')
     .then(user => {
         deferred.resolve(user.data); 
@@ -94,7 +93,7 @@ module.exports.saveAccount = (member) => {
 module.exports.deleteAccount = (_id) => {
     let headers = createHeader();
     let deferred = q.defer();
-    
+
     axios({
         method: 'POST',
         url: '/api/member/delete',
